@@ -495,7 +495,7 @@ __STATIC__ size_t adjust_request_size(size_t size, size_t align)
         return 0;
     }
 
-    adjust_size = align_up(size, align);
+    adjust_size = align_up(size, align);    //todo
     if (adjust_size > K_MMHEAP_BLK_SIZE_MAX) {
         return 0;
     }
@@ -590,7 +590,7 @@ __API__ void *tos_mmheap_alloc(size_t size)
     size_t          adjust_size;
     mmheap_blk_t   *blk;
 
-    adjust_size     = adjust_request_size(size, K_MMHEAP_ALIGN_SIZE);
+    adjust_size     = adjust_request_size(size, K_MMHEAP_ALIGN_SIZE);   //  申请的空间按照4B对齐
     blk             = blk_locate_free(adjust_size);
     if (!blk) {
         return K_NULL;

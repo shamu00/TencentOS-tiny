@@ -41,16 +41,16 @@
 // actually we don't really need those TASK_STATE below, if you understand the task state deeply, the code can be much more elegant.
 
 // we are pending, also we are waitting for a timeout(eg. tos_sem_pend with a valid timeout, not TOS_TIME_FOREVER)
-// both a task's tick_list and pend_list is not empty
+// both a task's tick_list and pend_list is not empty   3
 #define K_TASK_STATE_PENDTIMEOUT                      (k_task_state_t)(K_TASK_STATE_PEND | K_TASK_STATE_SLEEP)
 
-// suspended when sleeping
+// suspended when sleeping  5
 #define K_TASK_STATE_SLEEP_SUSPENDED                  (k_task_state_t)(K_TASK_STATE_SLEEP | K_TASK_STATE_SUSPENDED)
 
-// suspended when pending
+// suspended when pending   6
 #define K_TASK_STATE_PEND_SUSPENDED                   (k_task_state_t)(K_TASK_STATE_PEND | K_TASK_STATE_SUSPENDED)
 
-// suspended when pendtimeout
+// suspended when pendtimeout   7
 #define K_TASK_STATE_PENDTIMEOUT_SUSPENDED            (k_task_state_t)(K_TASK_STATE_PENDTIMEOUT | K_TASK_STATE_SUSPENDED)
 
 
@@ -110,16 +110,16 @@ typedef struct k_task_st {
     k_timeslice_t       timeslice;          /**< how much time slice left for us? */
 #endif
 
-#if (TOS_CFG_MESSAGE_QUEUE_EN > 0u) || (TOS_CFG_PRIORITY_MESSAGE_QUEUE_EN > 0u)
+#if (TOS_CFG_MESSAGE_QUEUE_EN > 0u) || (TOS_CFG_PRIORITY_MESSAGE_QUEUE_EN > 0u) // 等消息
     void               *msg;                /**< if we pend a message queue successfully, our msg will be set by the message queue poster */
 #endif
 
-#if (TOS_CFG_MAIL_QUEUE_EN > 0u) || (TOS_CFG_PRIORITY_MAIL_QUEUE_EN > 0u)
+#if (TOS_CFG_MAIL_QUEUE_EN > 0u) || (TOS_CFG_PRIORITY_MAIL_QUEUE_EN > 0u)   // 等邮件
     void               *mail;               /**< if we pend a mail queue successfully, our mail and mail_size will be set by the message queue poster */
     size_t              mail_size;
 #endif
 
-#if TOS_CFG_EVENT_EN > 0u
+#if TOS_CFG_EVENT_EN > 0u   // 等事件
     k_opt_t             opt_event_pend;     /**< if we are pending an event, what's the option for the pending(TOS_OPT_EVENT_PEND_*)? */
     k_event_flag_t      flag_expect;        /**< if we are pending an event, what event flag are we pending for ? */
     k_event_flag_t     *flag_match;         /**< if we pend an event successfully, flag_match will be set by the event poster, and will be returned

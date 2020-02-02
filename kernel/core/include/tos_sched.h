@@ -25,9 +25,9 @@
 #define K_PRIO_BIT(prio)            ((uint32_t)1u << (K_PRIO_TBL_SLOT_SIZE - 1u - ((prio) & (K_PRIO_TBL_SLOT_SIZE - 1u))))
 
 typedef struct readyqueue_st {
-    k_list_t    task_list_head[TOS_CFG_TASK_PRIO_MAX];
-    uint32_t    prio_mask[K_PRIO_TBL_SIZE];
-    k_prio_t    highest_prio;
+    k_list_t    task_list_head[TOS_CFG_TASK_PRIO_MAX];  // 为每个优先级都分配一个列表
+    uint32_t    prio_mask[K_PRIO_TBL_SIZE];     //  优先级掩码数组
+    k_prio_t    highest_prio;   // 记录优先级列表的最高优先级
 } readyqueue_t;
 
 __KERNEL__ void         readyqueue_init(void);

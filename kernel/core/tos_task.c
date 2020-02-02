@@ -159,7 +159,7 @@ __STATIC__ k_err_t task_do_destroy(k_task_t *task)
 #if TOS_CFG_MUTEX_EN > 0u
     // when we die, wakeup all the people in this land.
     if (!tos_list_empty(&task->mutex_own_list)) {
-        task_mutex_release(task);
+        task_mutex_release(task);   // todo
     }
 #endif
 
@@ -194,7 +194,7 @@ __API__ k_err_t tos_task_destroy(k_task_t *task)
 
     TOS_OBJ_VERIFY(task, KNL_OBJ_TYPE_TASK);
 
-    if (knl_is_self(task) && knl_is_sched_locked()) {
+    if (knl_is_self(task) && knl_is_sched_locked()) {   // 是任务自身, 且被调度器锁住
         return K_ERR_SCHED_LOCKED;
     }
 
@@ -211,7 +211,7 @@ __API__ k_err_t tos_task_destroy(k_task_t *task)
 
 __STATIC__ void task_free(k_task_t *task)
 {
-    tos_mmheap_free(task->stk_base);
+    tos_mmheap_free(task->stk_base);    // todo
     tos_mmheap_free(task);
 }
 
