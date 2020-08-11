@@ -16,9 +16,9 @@
  *---------------------------------------------------------------------------*/
 
 #ifndef _TOS_COUNTDOWNLATCH_H_
-#define  _TOS_COUNTDOWNLATCH_H_
+#define _TOS_COUNTDOWNLATCH_H_
 
-#if TOS_CFG_COUNTDOWNLATCH_EN > 0u
+__CDECLS_BEGIN
 
 typedef struct k_countdownlatch_st {
 #if TOS_CFG_OBJECT_VERIFY_EN > 0u
@@ -108,13 +108,14 @@ __API__ k_err_t tos_countdownlatch_post(k_countdownlatch_t *countdownlatch);
  * @attention None.
  *
  * @param[in]   countdownlatch  pointer to the handler of the countdown-latch.
+ * @param[in]   count           the count to wait of the countdown-latch.
  *
  * @return  errcode
  * @retval  #K_ERR_NONE                     return successfully.
  */
 __API__ k_err_t tos_countdownlatch_reset(k_countdownlatch_t *countdownlatch, k_countdownlatch_cnt_t count);
 
-#endif
+__CDECLS_END
 
-#endif
+#endif /* _TOS_COUNTDOWNLATCH_H_ */
 

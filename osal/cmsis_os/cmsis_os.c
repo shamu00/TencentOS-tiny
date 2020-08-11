@@ -75,9 +75,20 @@ osThreadId osThreadCreate(const osThreadDef_t *thread_def, void *argument)
         return NULL;
     }
 
+#if TOS_CFG_TASK_DYNAMIC_CREATE_EN > 0u
+    if (!thread_def->stackbase && !thread_def->task) {
+        k_task_t *task;
+        err = tos_task_create_dyn(&task, thread_def->name, (k_task_entry_t)thread_def->pthread,
+                                argument, priority_cmsis2knl(thread_def->tpriority),
+                                thread_def->stacksize, thread_def->timeslice);
+        return err == K_ERR_NONE ? task : NULL;
+    }
+#endif
+
     err = tos_task_create((k_task_t *)thread_def->task, thread_def->name, (k_task_entry_t)thread_def->pthread,
                             argument, priority_cmsis2knl(thread_def->tpriority), thread_def->stackbase,
                             thread_def->stacksize, thread_def->timeslice);
+
     return err == K_ERR_NONE ? thread_def->task : NULL;
 }
 
@@ -109,6 +120,17 @@ osStatus osThreadTerminate(osThreadId thread_id)
 osStatus osThreadSetPriority(osThreadId thread_id, osPriority priority)
 {
     return errno_knl2cmsis(tos_task_prio_change((k_task_t *)thread_id, priority_cmsis2knl(priority)));
+}
+
+/**
+ * @brief Pass control to next thread that is in state READY.
+ * @return status code that indicates the execution status of the function.
+ */
+osStatus osThreadYield(void)
+{
+    tos_task_yield();
+    
+    return osOK;
 }
 
 /**
@@ -345,7 +367,6 @@ osStatus osSemaphoreDelete(osSemaphoreId semaphore_id)
 
 #endif // TOS_CFG_SEM_EN
 
-#if TOS_CFG_MMBLK_EN > 0u
 //  ==== Memory Pool Management Functions ====
 
 #if (defined (osFeature_Pool)  &&  (osFeature_Pool != 0))  // Memory Pool Management available
@@ -413,7 +434,6 @@ osStatus osPoolFree(osPoolId pool_id, void *block)
 }
 
 #endif // Memory Pool Management available
-#endif // TOS_CFG_MMBLK_EN
 
 #if TOS_CFG_MESSAGE_QUEUE_EN > 0u
 //  ==== Message Queue Management Functions ====
@@ -449,7 +469,7 @@ osMessageQId osMessageCreate(const osMessageQDef_t *queue_def, osThreadId thread
  */
 osStatus osMessagePut(osMessageQId queue_id, uint32_t info, uint32_t millisec)
 {
-    return errno_knl2cmsis(tos_msg_q_post((k_msg_q_t *)queue_id, &info));
+    return errno_knl2cmsis(tos_msg_q_post((k_msg_q_t *)queue_id, (uint32_t*)info));
 }
 
 /**
@@ -475,7 +495,7 @@ osEvent osMessageGet(osMessageQId queue_id, uint32_t millisec)
     if (err == K_ERR_NONE) {
         event.def.message_id    = queue_id;
         event.status            = errno_knl2cmsis(err);
-        event.value.v           = *((uint32_t *)msg_body);
+        event.value.v           = (uint32_t)msg_body;
     } else {
         event.def.message_id    = NULL;
         event.status            = osErrorOS;

@@ -18,6 +18,8 @@
 #ifndef _TOS_BINARY_HEAP_H_
 #define  _TOS_BINARY_HEAP_H_
 
+__CDECLS_BEGIN
+
 typedef int (*k_bin_heap_cmp)(void *first, void *second);
 
 typedef struct k_binary_heap_st {
@@ -69,8 +71,6 @@ __API__ k_err_t tos_bin_heap_create(k_bin_heap_t *bin_heap, void *pool, size_t i
  */
 __API__ k_err_t tos_bin_heap_destroy(k_bin_heap_t *bin_heap);
 
-#if TOS_CFG_MMHEAP_EN > 0u
-
 /**
  * @brief Create a binary heap with a dynamic allocated pool.
  * create a binary heap with a dynamic allocated pool.
@@ -99,8 +99,6 @@ __API__ k_err_t tos_bin_heap_create_dyn(k_bin_heap_t *bin_heap, size_t item_cnt,
  * @retval  #K_ERR_NONE                   return successfully.
  */
 __API__ k_err_t tos_bin_heap_destroy_dyn(k_bin_heap_t *bin_heap);
-
-#endif
 
 /**
  * @brief Push an item.
@@ -175,6 +173,8 @@ __API__ int tos_bin_heap_is_empty(k_bin_heap_t *bin_heap);
  * @retval  #Not 0  the binary hea is full.
  */
 __API__ int tos_bin_heap_is_full(k_bin_heap_t *bin_heap);
+
+__CDECLS_END
 
 #endif /* _TOS_BINARY_HEAP_H_ */
 

@@ -18,6 +18,8 @@
 #ifndef _TOS_CHAR_FIFO_H_
 #define  _TOS_CHAR_FIFO_H_
 
+__CDECLS_BEGIN
+
 typedef struct k_char_fifo_st {
     knl_obj_t   knl_obj;
 
@@ -55,8 +57,6 @@ __API__ k_err_t tos_chr_fifo_create(k_chr_fifo_t *chr_fifo, void *buffer, size_t
  */
 __API__ k_err_t tos_chr_fifo_destroy(k_chr_fifo_t *chr_fifo);
 
-#if TOS_CFG_MMHEAP_EN > 0u
-
 /**
  * @brief Create a character fifo with a dynamic allocated buffer.
  * Create a character fifo with a dynamic allocated buffer.
@@ -86,8 +86,6 @@ __API__ k_err_t tos_chr_fifo_create_dyn(k_chr_fifo_t *chr_fifo, size_t fifo_size
  * @retval  #K_ERR_NONE         return successfully.
  */
 __API__ k_err_t tos_chr_fifo_destroy_dyn(k_chr_fifo_t *chr_fifo);
-
-#endif
 
 /**
  * @brief Push data into character fifo.
@@ -187,5 +185,7 @@ __API__ int     tos_chr_fifo_is_empty(k_chr_fifo_t *chr_fifo);
  */
 __API__ int     tos_chr_fifo_is_full(k_chr_fifo_t *chr_fifo);
 
-#endif // _TOS_CHAR_FIFO_H_
+__CDECLS_END
+
+#endif /* _TOS_CHAR_FIFO_H_ */
 

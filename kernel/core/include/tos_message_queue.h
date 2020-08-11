@@ -18,6 +18,8 @@
 #ifndef _TOS_MESSAGE_QUEUE_H_
 #define  _TOS_MESSAGE_QUEUE_H_
 
+__CDECLS_BEGIN
+
 #if TOS_CFG_MESSAGE_QUEUE_EN > 0u
 
 typedef struct k_message_queue_st {
@@ -55,8 +57,6 @@ __API__ k_err_t tos_msg_q_create(k_msg_q_t *msg_q, void *pool, size_t msg_cnt);
  */
 __API__ k_err_t tos_msg_q_destroy(k_msg_q_t *msg_q);
 
-#if TOS_CFG_MMHEAP_EN > 0u
-
 /**
  * @brief Create a message queue with dynamic allocated pool.
  * create a message queue with dynamic allocated pool.
@@ -83,8 +83,6 @@ __API__ k_err_t tos_msg_q_create_dyn(k_msg_q_t *msg_q, size_t msg_cnt);
  * @retval  #K_ERR_NONE                   return successfully.
  */
 __API__ k_err_t tos_msg_q_destroy_dyn(k_msg_q_t *msg_q);
-
-#endif
 
 /**
  * @brief Flush the message queue.
@@ -149,6 +147,8 @@ __API__ k_err_t tos_msg_q_post(k_msg_q_t *msg_q, void *msg_ptr);
 __API__ k_err_t tos_msg_q_post_all(k_msg_q_t *msg_q, void *msg_ptr);
 
 #endif
+
+__CDECLS_END
 
 #endif /* _TOS_MESSAGE_QUEUE_H_ */
 

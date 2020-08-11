@@ -70,24 +70,6 @@
 
 
 /////////////////////////////////////////
-// disable countdownlatch
-#ifdef TOS_CFG_COUNTDOWNLATCH_EN
-#undef  TOS_CFG_COUNTDOWNLATCH_EN
-#endif
-#define TOS_CFG_COUNTDOWNLATCH_EN           0u
-/////////////////////////////////////////
-
-
-/////////////////////////////////////////
-// disable completion
-#ifdef TOS_CFG_COMPLETION_EN
-#undef  TOS_CFG_COMPLETION_EN
-#endif
-#define TOS_CFG_COMPLETION_EN           0u
-/////////////////////////////////////////
-
-
-/////////////////////////////////////////
 // disable the "traditional" timer
 #ifdef TOS_CFG_TIMER_EN
 #undef  TOS_CFG_TIMER_EN
@@ -108,19 +90,11 @@
 /////////////////////////////////////////
 // enable mmheap
 #ifndef TOS_CFG_MMHEAP_EN
-#define TOS_CFG_MMHEAP_EN                       1u
+#define TOS_CFG_MMHEAP_EN                       0u
 #endif
 
 #ifndef TOS_CFG_MMHEAP_DEFAULT_POOL_EN
 #define TOS_CFG_MMHEAP_DEFAULT_POOL_EN          1u
-#endif
-/////////////////////////////////////////
-
-
-/////////////////////////////////////////
-// disable default
-#ifndef TOS_CFG_MMBLK_EN
-#define TOS_CFG_MMBLK_EN                       0u
 #endif
 /////////////////////////////////////////
 
@@ -206,14 +180,6 @@
 #define  TOS_CFG_SEM_EN                     0u
 #endif
 
-#ifndef TOS_CFG_COUNTDOWNLATCH_EN
-#define TOS_CFG_COUNTDOWNLATCH_EN           0u
-#endif
-
-#ifndef TOS_CFG_COMPLETION_EN
-#define TOS_CFG_COMPLETION_EN               0u
-#endif
-
 #ifndef TOS_CFG_TIMER_EN
 #define  TOS_CFG_TIMER_EN                   0u
 #endif
@@ -256,10 +222,6 @@
 
 #ifndef TOS_CFG_TASK_PRIO_MAX
 #define  TOS_CFG_TASK_PRIO_MAX                  8u
-#endif
-
-#ifndef TOS_CFG_MMBLK_EN
-#define TOS_CFG_MMBLK_EN                       0u
 #endif
 
 #ifndef TOS_CFG_MMHEAP_EN

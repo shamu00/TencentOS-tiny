@@ -18,6 +18,8 @@
 #ifndef _TOS_ROBIN_H_
 #define  _TOS_ROBIN_H_
 
+__CDECLS_BEGIN
+
 #if TOS_CFG_ROUND_ROBIN_EN > 0u
 
 /**
@@ -35,20 +37,21 @@ __API__ void    tos_robin_timeslice_set(k_task_t *task, k_timeslice_t timeslice)
 
 /**
  * @brief Configure round robin.
- * Set the round robin state and the default time slice of the task.
+ * Set the default time slice of the task.
  *
  * @attention None
  *
- * @param[in]   robin_state         state of the round robin.
  * @param[in]   default_timeslice   default time slice of the task.
  *
  * @return  None
  */
 __API__ void    tos_robin_default_timeslice_config(k_timeslice_t default_timeslice);
 
-__KERNEL__ void robin_sched(k_prio_t prio);
+__KNL__ void    robin_sched(k_prio_t prio);
 
-#endif
+#endif /* TOS_CFG_ROUND_ROBIN_EN */
+
+__CDECLS_END
 
 #endif /* _TOS_ROBIN_H_ */
 

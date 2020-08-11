@@ -1,4 +1,4 @@
-﻿
+
 ![](./doc/image/introduction/TencentOS_tiny_log.png)
 
 [![license](http://img.shields.io/badge/license-BSD-blue.svg)](https://github.com/Tencent/TencentOS-tiny/blob/master/LICENSE)
@@ -15,9 +15,10 @@
 ## 1、TencentOS tiny整体架构
 
 ![](./doc/image/introduction/TencentOS_tiny_Architecture.png)
+
 TencentOS tiny 主体架构图，从下到上主要包括：
 
-**CPU 库** ：TencentOS tiny 支持的 CPU IP 核架构，当前主要支持 ARM Cortex M0/3/4/7。
+**CPU 库** ：TencentOS tiny 支持的 CPU IP 核架构，当前主要支持 ARM Cortex M0/3/4/7，Cortex A7，RISC-V、MSP430、AVR、STM8等。
 
 **驱动管理层** ：包括板级支持包（BSP，主要由 MCU 芯片厂家开发与维护）、硬件抽象（HAL，主要由 TencentOS tiny提供，方便不同芯片的适配与移植）、设备驱动（Drivers，例如 Wi-Fi、GPRS、LoRa 等模块的驱动程序）。
 
@@ -60,23 +61,25 @@ TencentOS tiny 主体架构图，从下到上主要包括：
 
 ![](./doc/image/introduction/Partners.png)
 
-TencentOS tiny目前支持STM32、NXP、华大半导体、国民技术、GD32、Nordic、TI等主流MCU。当前已完成两套官方定制开发板设计，支持全系列STM32 NUCLEO官方评估板内核移植。TencentOS tiny 将携手合作伙伴为物联网终端厂家提供更优质的IoT终端软件解决方案，方便各种物联网设备快速接入腾讯云，共同扩展IoT生态，更好地支撑智慧城市、智能水表、智能家居、智能穿戴、车联网等多种行业应用。
+TencentOS tiny自开源发布以来也在努力发展合作伙伴，期待合作共赢，共同扩展IoT应用生态。目前已经与多家MCU/IP核厂家达成了合作，包括意法半导体、恩智浦半导体、兆易半导体、ARM、华大半导体、芯来科技等；也与无线SOC和模组厂家达成了广泛的合作关系，包括瑞兴恒方、国民技术、Nordic蓝牙、亮牛半导体、有人物联网等，
+
+除了MCU和模组外，TencentOS tiny也积极推进终端产品及项目的落地，目前已经形成了AI智慧农业、智能货柜、智慧会议室等方案，并且在腾讯内部与AI 平台部、腾讯微瓴、QQ family达成内部合作，共同扩展行业生态；同时也开始积极发展外部客户，目前与深圳光合显示科技的墨水屏零售标签、鑫悦购充电桩等达成业务合作。TencentOS tiny 将携手合作伙伴为物联网终端厂家提供更优质的IoT终端软件解决方案，方便各种物联网设备快速接入腾讯云，共同扩展IoT生态，更好地支撑智慧城市、智能水表、智能家居、智能穿戴、车联网等多种行业应用。
 
 欢迎IoT相关项目合作，有合作需求的请邮件联系TencentOS tiny官方工作人员，邮箱地址 ： supowang@tencent.com
 
 # 二、TencentOS tiny 代码目录
-- [TencentOS tiny代码目录说明](./doc/09.TencentOS_tiny_code_directory_description.md)
+- [TencentOS tiny代码目录说明](./doc/09.Code_Directories.md)
 
 # 三、TencentOS tiny 参考文档
 ## 1、移植指南
-- [TencentOS tiny移植指南（KEIL版本）](./doc/10.TencentOS_tiny_porting_guide_keil.md)
-- [TencentOS tiny移植指南（IAR版本）](./doc/11.TencentOS_tiny_porting_guide_iar.md)
-- [TencentOS tiny移植指南（GCC版本）](./doc/12.TencentOS_tiny_porting_guide_gcc.md)
+- [TencentOS tiny移植指南（KEIL版本）](./doc/10.Porting_Manual_for_KEIL.md)
+- [TencentOS tiny移植指南（IAR版本）](./doc/11.Porting_Manual_for_IAR.md)
+- [TencentOS tiny移植指南（GCC版本）](./doc/12.Porting_Manual_for_GCC.md)
 
 ## 2、TencentOS tiny 开发指南
-- [TencentOS tiny内核开发指南](./doc/04.TencentOS_tiny_Development_Guide.md)
-- [TencentOS tiny API参考](./doc/05.TencentOS_tiny_SDK_documentation.md)
-- [TencentOS tiny对接腾讯云IoTHub开发指南](./doc/08.The_development_Guide_for_use_TencentOS_tiny_connect_to_Tencent_Cloud_IoTHub.md)
+- [TencentOS tiny内核开发指南](./doc/04.Development_Manual.md)
+- [TencentOS tiny API参考](./doc/05.SDK_Manual.md)
+- [TencentOS tiny对接腾讯云IoTHub开发指南](./doc/08.QCloud_IoTHub_Quick_Start.md)
 
 # 四、TencentOS tiny 开源协议
 * TencentOS tiny 遵循 [BSD-3开源许可协议](LICENSE)
@@ -92,7 +95,7 @@ TencentOS tiny联合合作伙伴(南京厚德物联网)设计了定制开发板�
 ![](./doc/image/introduction/EVB_MX.png)
 
 - [TencentOS tiny定制开发板介绍页](http://www.holdiot.com/product/showproduct.php?id=8)，开发者可以基于定制开发板进行快速入门学习，点击下载参考文档
-- [TencentOS-tiny定制开发板入门指南](./doc/15.TencentOS_tiny_Custom_Development_Board_Getting_Started_Guide.pdf)
+- [TencentOS-tiny定制开发板入门指南](./doc/15.TencentOS_tiny_EVB_MX_Plus_Quick_Start.md)
 
 # 七、贡献代码
 * 1.  在您自己的GitHub账户下Fork TencentOS tiny 开源项目；

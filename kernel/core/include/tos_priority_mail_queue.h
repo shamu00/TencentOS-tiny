@@ -18,6 +18,8 @@
 #ifndef _TOS_PRIORITY_MAIL_QUEUE_H_
 #define  _TOS_PRIORITY_MAIL_QUEUE_H_
 
+__CDECLS_BEGIN
+
 #if TOS_CFG_PRIORITY_MAIL_QUEUE_EN > 0u
 
 typedef struct k_priority_mail_queue_st {
@@ -65,7 +67,6 @@ __API__ k_err_t tos_prio_mail_q_destroy(k_prio_mail_q_t *prio_mail_q);
  * @attention a MAIL is a buffer with a certain size.
  *
  * @param[in]   prio_mail_q pointer to the handler of the priority mail queue.
- * @param[in]   pool        pool buffer of the priority mail queue.
  * @param[in]   mail_cnt    mail count of the priority mail queue.
  * @param[in]   mail_size   size of each mail in the priority mail queue.
  *
@@ -158,7 +159,9 @@ __API__ k_err_t tos_prio_mail_q_post(k_prio_mail_q_t *prio_mail_q, void *mail_bu
  */
 __API__ k_err_t tos_prio_mail_q_post_all(k_prio_mail_q_t *prio_mail_q, void *mail_buf, size_t mail_size, k_prio_t prio);
 
-#endif
-
 #endif /* TOS_CFG_PRIORITY_MAIL_QUEUE_EN */
+
+__CDECLS_END
+
+#endif /* _TOS_PRIORITY_MAIL_QUEUE_H_ */
 

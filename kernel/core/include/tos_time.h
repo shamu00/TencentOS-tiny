@@ -18,6 +18,8 @@
 #ifndef _TOS_TIME_H_
 #define  _TOS_TIME_H_
 
+__CDECLS_BEGIN
+
 // if you wanna pend for something forever, use TOS_TIME_FOREVER
 #define TOS_TIME_FOREVER            (k_tick_t)(-1)
 // if you don't wanna wait when you pend nothing, use TOS_TIME_NOWAIT
@@ -47,7 +49,7 @@ __API__ k_tick_t    tos_systick_get(void);
  *
  * @param   tick        systick count to set
  *
- * @return  tick count since boot
+ * @return  None
  */
 __API__ void        tos_systick_set(k_tick_t tick);
 
@@ -105,6 +107,8 @@ __API__ k_err_t     tos_sleep_ms(k_time_t millisec);
  * @retval  #K_ERR_NONE           return successfully.
  */
 __API__ k_err_t     tos_sleep_hmsm(k_time_t hour, k_time_t minute, k_time_t second, k_time_t millisec);
+
+__CDECLS_END
 
 #endif /* _TOS_TIME_H_ */
 
